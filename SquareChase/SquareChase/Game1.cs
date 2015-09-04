@@ -92,6 +92,19 @@ namespace SquareChase
                 timeRemaining = TIME_PER_SQUARE;
             }
 
+            MouseState mouse = Mouse.GetState();
+            if (
+                (mouse.LeftButton == ButtonState.Pressed) &&
+                currentSquare.Contains(mouse.X, mouse.Y)
+                )
+            {
+                playerScore++;
+                timeRemaining = 0.0f;
+            }
+
+            timeRemaining = MathHelper.Max(0, timeRemaining - (float)gameTime.ElapsedGameTime.TotalSeconds);
+            this.Window.Title = "Score : " + playerScore.ToString();
+
             base.Update(gameTime);
         }
 
@@ -105,7 +118,7 @@ namespace SquareChase
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(squareTexture, new Rectangle(100, 100, 200, 200), colors[0]);
+            spriteBatch.Draw(squareTexture, currentSquare, colors[playerScore%3]);
             spriteBatch.End();
 
             base.Draw(gameTime);
