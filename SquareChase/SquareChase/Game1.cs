@@ -18,6 +18,14 @@ namespace SquareChase
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        // add game specific variables
+        Random      rand = new Random();
+        Texture2D   squareTexture;
+        Rectangle   currentSquare;
+        int         playerScore = 0;
+        float       timeRemaining = 0.0f;
+        const float TIME_PER_SQUARE = 0.75f;
+        Color[]     colors = new Color[3] {Color.Red, Color.Green, Color.Blue};
 
         public Game1()
         {
@@ -34,6 +42,7 @@ namespace SquareChase
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.IsMouseVisible = true;
 
             base.Initialize();
         }
